@@ -61,7 +61,7 @@ function initializePage()
   document.getElementById('CrystalsSpentUpgrading').setAttribute("readonly", "true");
   document.getElementById('CrystalsRemaining').setAttribute("readonly", "true");
   var queryString = decodeURIComponent(window.location.search.substring(1));
-  if (queryString.match(/\bs=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*){22})/))
+  if (queryString.match(/\bs=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*)+)/))
   {
     loadFromQueryString(1);
   }
@@ -316,7 +316,7 @@ function loadFromCookie(showAlert)
 function loadFromTextarea(showAlert)
 {
   var loaded = 0;
-  var textareaMatches = document.getElementById('SaveDataTextarea').value.match(/^\s*(((c|,a)[0-9]*:[0-9]+\-?[0-9]*){22});?\s*$/);
+  var textareaMatches = document.getElementById('SaveDataTextarea').value.match(/^\s*(((c|,a)[0-9]*:[0-9]+\-?[0-9]*)+);?\s*$/);
   if ( (textareaMatches) && (textareaMatches.length > 0) )
   {
     loaded = 1;
@@ -331,9 +331,9 @@ function loadFromQueryString(showAlert)
 {
   var loaded = 0;
   var queryString = decodeURIComponent(window.location.search.substring(1));
-  if ( (queryString) && (queryString.match(/\bs=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*){22})/)) )
+  if ( (queryString) && (queryString.match(/\bs=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*)+)/)) )
   {
-    queryStringMatches = queryString.match(/\bs=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*){22})/);
+    queryStringMatches = queryString.match(/\bs=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*)+)/);
     if (queryStringMatches.length > 0)
     {
       loaded = 1;
