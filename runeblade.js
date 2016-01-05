@@ -19,7 +19,7 @@ Artefacts['Cursed Divining Rod'] = {'order': 15, 'name': 'Cursed Divining Rod', 
 Artefacts['Rune Booster Charm: Rozh Gemstone'] = {'order': 16, 'name': 'Rune Booster Charm: Rozh Gemstone', 'weight': 1, 'maxLevel': 40, 'costFactor': 'Linear-1', 'effectFactor': -2, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Rozh Cost Reduction', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Umbaorian Amulet'] = {'order': 17, 'name': 'Umbaorian Amulet', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Next Generation Starting Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Mauhak Battle Focus'] = {'order': 18, 'name': 'Mauhak Battle Focus', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 1, 'effectBaseValue': 30, 'costLevelModifier': 0, 'effectLabel': 'Guardian Battle Duration', 'effectPreSymbol': '', 'effectPostSymbol': 's' };
-Artefacts['Ring of Engagement'] = {'order': 19, 'name': 'Ring of Engagement', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 0, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Converted to TAP', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
+Artefacts['Ring of Engagement'] = {'order': 19, 'name': 'Ring of Engagement', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Converted to TAP', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Mithrode Jewel'] = {'order': 20, 'name': 'Mithrode Jewel', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Hourly DPS boost till TAP', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Fury Goader'] = {'order': 21, 'name': 'Fury Goader', 'weight': 1, 'maxLevel': 90, 'costFactor': 'Exponential-2', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Crytical Hit probability', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Enemy Health Reduction', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
@@ -262,6 +262,16 @@ function clearUpgrades()
   for (var artefactName in Artefacts)
   {
     setArtefactUpgradedLevel(artefactName, 0);
+  }
+}
+function transferUpgrades()
+{
+  for (var artefactName in Artefacts)
+  {
+    if(artefactName != 'Rozh Gemstone') {
+      var artefactObject = Artefacts[artefactName];
+      setArtefactCurrentLevel(artefactName, artefactObject['upgradedLevel']);
+    }
   }
 }
 function byOrder(a, b)
