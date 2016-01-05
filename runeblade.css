@@ -14,6 +14,12 @@
   clear : both;
   background-color: #CCCCCC;
 }
+.div-table-col-buttons
+{
+  float : left;/*fix for buggy browsers*/
+  display: table-column;
+  width : 300px;
+}
 .div-table-col-label
 {
   float : left;/*fix for buggy browsers*/
