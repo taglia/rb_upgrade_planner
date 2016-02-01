@@ -1,4 +1,4 @@
-var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 1024000, 2048000];
+var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000];
 var Artefacts = new Object;
 Artefacts['Rozh Gemstone'] = {'order': 0, 'name': 'Rozh Gemstone', 'weight': 0, 'maxLevel': 0, 'costFactor': 'Exponential-1.25', 'effectFactor': .5, 'effectBaseValue': .5, 'costLevelModifier': -1, 'effectLabel': 'Rune Multiplier', 'effectPreSymbol': '', 'effectPostSymbol': 'X' };
 Artefacts['Etraxxan Wristband'] = {'order': 1, 'name': 'Etraxxan Wristband', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 30, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Attack Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
@@ -6,12 +6,12 @@ Artefacts['Samadun Runic Stone'] = {'order': 2, 'name': 'Samadun Runic Stone', '
 Artefacts['Headband of Perception'] = {'order': 3, 'name': 'Headband of Perception', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 15, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Gold Increase', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Ring of Odagh'] = {'order': 4, 'name': 'Ring of Odagh', 'weight': 1, 'maxLevel': 10, 'costFactor': 'Linear-1', 'effectFactor': 2, 'effectBaseValue': 3, 'costLevelModifier': 0, 'effectLabel': 'TAP Length (in seconds)', 'effectPreSymbol': '', 'effectPostSymbol': '' };
 Artefacts['Nanzuum Mana Cube'] = {'order': 5, 'name': 'Nanzuum Mana Cube', 'weight': 1, 'maxLevel': 10, 'costFactor': 'Linear-1', 'effectFactor': 5, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Spell Cooldown', 'effectPreSymbol': '-', 'effectPostSymbol': '%' };
-Artefacts['Nocri Orb of Teleportation'] = {'order': 6, 'name': 'Nocri Orb of Teleportation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 0, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Mysterious Effect', 'effectPreSymbol': '', 'effectPostSymbol': '' };
+Artefacts['Nocri Orb of Teleportation'] = {'order': 6, 'name': 'Nocri Orb of Teleportation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Nocri-1.5', 'effectFactor': 0, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Mysterious Effect', 'effectPreSymbol': '', 'effectPostSymbol': '' };
 Artefacts['Thegian Pendant of Stealth'] = {'order': 7, 'name': 'Thegian Pendant of Stealth', 'weight': 1, 'maxLevel': 5, 'costFactor': 'Linear-10', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Enemies Evaded', 'effectPreSymbol': '', 'effectPostSymbol': '/10'};
 Artefacts['Arai Talisman'] = {'order': 8, 'name': 'Arai Talisman', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 25, 'costLevelModifier': 0, 'effectLabel': 'Master Guardian Encounter', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Loan Agreement'] = {'order': 9, 'name': 'Loan Agreement', 'weight': 1, 'maxLevel': 10, 'costFactor': 'Exponential-1.5', 'effectFactor': -999, 'effectBaseValue': 1500, 'costLevelModifier': 0, 'effectLabel': 'Starting Gold', 'effectPreSymbol': '', 'effectPostSymbol': '' };
 Artefacts['Mana Shard'] = {'order': 10, 'name': 'Mana Shard', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 2, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Crystal Loot Increase', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
-Artefacts['Spell Booster Charm: Invigorate'] = {'order': 11, 'name': 'Spell Booster Charm: Invigorate', 'weight': 1, 'maxLevel': 4, 'costFactor': 'Exponential-3', 'effectFactor': 1, 'effectBaseValue': 1, 'costLevelModifier': 0, 'effectLabel': 'Cooldown removed from', 'effectPreSymbol': '', 'effectPostSymbol': ' spells' };
+Artefacts['Spell Booster Charm: Invigorate'] = {'order': 11, 'name': 'Spell Booster Charm: Invigorate', 'weight': 1, 'maxLevel': 4, 'costFactor': 'Exponential-3', 'effectFactor': 1, 'effectBaseValue': 1, 'costLevelModifier': 0, 'effectLabel': 'Cooldown Removed From', 'effectPreSymbol': '', 'effectPostSymbol': ' spells' };
 Artefacts['Spell Booster Charm: Tap Life'] = {'order': 12, 'name': 'Spell Booster Charm: Tap Life', 'weight': 1, 'maxLevel': 30, 'costFactor': 'Exponential-1.5', 'effectFactor': 0.5, 'effectBaseValue': 15, 'costLevelModifier': 0, 'effectLabel': 'Tap Life Duration', 'effectPreSymbol': '', 'effectPostSymbol': 'm' };
 Artefacts['Spell Booster Charm: Dark Alchemy'] = {'order': 13, 'name': 'Spell Booster Charm: Dark Alchemy', 'weight': 1, 'maxLevel': 10, 'costFactor': 'Exponential-3', 'effectFactor': 1, 'effectBaseValue': 20, 'costLevelModifier': 0, 'effectLabel': 'Dark Alchemy Duration', 'effectPreSymbol': '', 'effectPostSymbol': 's' };
 Artefacts['Spell Booster Charm: Fireblade'] = {'order': 14, 'name': 'Spell Booster Charm: Fireblade', 'weight': 1, 'maxLevel': 150, 'costFactor': 'Exponential-1.5', 'effectFactor': 2, 'effectBaseValue': 30, 'costLevelModifier': 0, 'effectLabel': 'Fireblade Duration', 'effectPreSymbol': '', 'effectPostSymbol': 's' };
@@ -20,9 +20,9 @@ Artefacts['Rune Booster Charm: Rozh Gemstone'] = {'order': 16, 'name': 'Rune Boo
 Artefacts['Umbaorian Amulet'] = {'order': 17, 'name': 'Umbaorian Amulet', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Next Generation Starting Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Mauhak Battle Focus'] = {'order': 18, 'name': 'Mauhak Battle Focus', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 1, 'effectBaseValue': 30, 'costLevelModifier': 0, 'effectLabel': 'Guardian Battle Duration', 'effectPreSymbol': '', 'effectPostSymbol': 's' };
 Artefacts['Ring of Engagement'] = {'order': 19, 'name': 'Ring of Engagement', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Converted to TAP', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
-Artefacts['Mithrode Jewel'] = {'order': 20, 'name': 'Mithrode Jewel', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Hourly DPS boost till TAP', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
+Artefacts['Mithrode Jewel'] = {'order': 20, 'name': 'Mithrode Jewel', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Increase Per Hour', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 Artefacts['Fury Goader'] = {'order': 21, 'name': 'Fury Goader', 'weight': 1, 'maxLevel': 90, 'costFactor': 'Exponential-2', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Crytical Hit probability', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
-Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Enemy Health Reduction', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
+Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 100, 'costLevelModifier': 0, 'effectLabel': 'Enemy Starting Health', 'effectPreSymbol': '', 'effectPostSymbol': '%' };
 var ExistingArtefacts = 0;
 var ArtefactsTotal = 0;
 var CrystalsToSpend = 0;
@@ -218,6 +218,17 @@ function getArtefactLevelCost(artefactObject, artefactLevel)
   else if (artefactCostType === 'Exponential')
   {
     artefactLevelCost = Math.round(Math.pow(artefactLevel + artefactCostLevelModifier, artefactCostFactor));
+  }
+  else if (artefactCostType === 'Nocri')
+  {
+    if (artefactLevel < 75)
+    {
+      artefactLevelCost = Math.round(Math.pow(artefactLevel + artefactCostLevelModifier, artefactCostFactor));
+    }
+    else
+    {
+      artefactLevelCost = Math.round((1 + (((artefactLevel-1) - 74)/50)) * Math.pow(artefactLevel, 1.5));
+    }
   }
   return(artefactLevelCost);
 }
