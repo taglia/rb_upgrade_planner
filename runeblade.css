@@ -88,3 +88,19 @@
 {
   text-align: center;
 }
+
+a {
+  transition: color .4s;
+  color: #3A20B2;
+  text-decoration: none;
+}
+
+a:link,
+a:visited { color: #3A20B2; }
+a:hover   { color: #9499FE; }
+a:active  {
+  transition: color .3s;
+  color: #6D5BBF;
+}
+
+.link { text-decoration: none; }

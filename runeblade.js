@@ -75,11 +75,11 @@ function setArtefactOwnership(artefactObject, ownership)
   artefactObject['owned'] = ownership;
   if (artefactObject['owned'])
   {
-    artefactObject['artefactDiv'].style.backgroundColor = '#99FF99';
+    artefactObject['artefactDiv'].style.backgroundColor = '#CFC';
   }
   else
   {
-    artefactObject['artefactDiv'].style.backgroundColor = '#FF9999';
+    artefactObject['artefactDiv'].style.backgroundColor = '#FCC';
   }
 }
 function changeArtefactCurrentLevel(artefactName, increment)
