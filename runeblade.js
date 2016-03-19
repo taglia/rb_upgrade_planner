@@ -24,7 +24,7 @@ Artefacts['Mithrode Jewel'] = {'order': 20, 'name': 'Mithrode Jewel', 'weight': 
 Artefacts['Fury Goader'] = {'order': 21, 'name': 'Fury Goader', 'weight': 1, 'maxLevel': 90, 'costFactor': 'Exponential-2', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Critical Hit Probability', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Fury_Goader' };
 Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 100, 'costLevelModifier': 0, 'effectLabel': 'Enemy Starting Health', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Death_Hex' };
 Artefacts['Warriors Periapt'] = {'order': 23, 'name': 'Warriors Periapt', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Incease Per Endurance', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Warriors_Periapt' };
-Artefacts['Focus of Elevation'] = {'order': 24, 'name': 'Focus of Elevation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Elevation-1', 'effectFactor': 0.1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS and TAP Increase Per Level', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Focus_of_Elevation' };
+Artefacts['Focus of Elevation'] = {'order': 24, 'name': 'Focus of Elevation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Elevation-1', 'effectFactor': .1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS and TAP Increase Per Level', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Focus_of_Elevation' };
 var ExistingArtefacts = 0;
 var ArtefactsTotal = 0;
 var CrystalsToSpend = 0;
@@ -256,7 +256,10 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
     artefactLevelEffect = artefactEffectBaseValue + (artefactLevel * artefactEffectFactor);
   }
   // Avoid showing useless decimals for Elevation (e.g. 0.300000000001%)
-  var artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
+  var artefactLevelEffectRnd = artefactLevelEffect;
+  if (!isNaN(artefactLevelEffect)) {
+    artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
+  }
   return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
 }
 function commify(number)
