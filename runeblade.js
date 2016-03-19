@@ -23,6 +23,8 @@ Artefacts['Ring of Engagement'] = {'order': 19, 'name': 'Ring of Engagement', 'w
 Artefacts['Mithrode Jewel'] = {'order': 20, 'name': 'Mithrode Jewel', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Increase Per Hour', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Mithrode_Jewel' };
 Artefacts['Fury Goader'] = {'order': 21, 'name': 'Fury Goader', 'weight': 1, 'maxLevel': 90, 'costFactor': 'Exponential-2', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Critical Hit Probability', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Fury_Goader' };
 Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 100, 'costLevelModifier': 0, 'effectLabel': 'Enemy Starting Health', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Death_Hex' };
+Artefacts['Warriors Periapt'] = {'order': 23, 'name': 'Warriors Periapt', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Incease Per Endurance', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Warriors_Periapt' };
+Artefacts['Focus of Elevation'] = {'order': 24, 'name': 'Focus of Elevation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Elevation-1', 'effectFactor': 0.1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS and TAP Increase Per Level', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Focus_of_Elevation' };
 var ExistingArtefacts = 0;
 var ArtefactsTotal = 0;
 var CrystalsToSpend = 0;
@@ -218,6 +220,10 @@ function getArtefactLevelCost(artefactObject, artefactLevel)
   else if (artefactCostType === 'Exponential')
   {
     artefactLevelCost = Math.round(Math.pow(artefactLevel + artefactCostLevelModifier, artefactCostFactor));
+  }
+  else if (artefactCostType === 'Elevation')
+  {
+    artefactLevelCost = (artefactLevel + artefactCostLevelModifier) * artefactLevel;
   }
   else if (artefactCostType === 'Nocri')
   {
