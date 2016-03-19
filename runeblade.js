@@ -18,17 +18,20 @@ Artefacts['Spell Booster Charm: Fireblade'] = {'order': 14, 'name': 'Spell Boost
 Artefacts['Cursed Divining Rod'] = {'order': 15, 'name': 'Cursed Divining Rod', 'weight': 1, 'maxLevel': 6, 'costFactor': 'Exponential-3', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Chests Detected', 'effectPreSymbol': '', 'effectPostSymbol': '', 'url': 'http://runeblade.wikia.com/wiki/Cursed_Divining_Rod' };
 Artefacts['Rune Booster Charm: Rozh Gemstone'] = {'order': 16, 'name': 'Rune Booster Charm: Rozh Gemstone', 'weight': 1, 'maxLevel': 40, 'costFactor': 'Linear-1', 'effectFactor': -2, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Rozh Cost Reduction', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Rune_Booster_Charm:_Rozh_Gemstone' };
 Artefacts['Umbaorian Amulet'] = {'order': 17, 'name': 'Umbaorian Amulet', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Next Generation Starting Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Umbaorian_Amulet' };
-Artefacts['Mauhak Battle Focus'] = {'order': 18, 'name': 'Mauhak Battle Focus', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 1, 'effectBaseValue': 30, 'costLevelModifier': 0, 'effectLabel': 'Guardian Battle Duration', 'effectPreSymbol': '', 'effectPostSymbol': 's', 'url': 'http://runeblade.wikia.com/wiki/Mauhak_Battle_Focus' };
+Artefacts['Mauhak Battle Focus'] = {'order': 18, 'name': 'Mauhak Battle Focus', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 30, 'costLevelModifier': 0, 'effectLabel': 'Guardian Battle Duration', 'effectPreSymbol': '', 'effectPostSymbol': 's', 'url': 'http://runeblade.wikia.com/wiki/Mauhak_Battle_Focus' };
 Artefacts['Ring of Engagement'] = {'order': 19, 'name': 'Ring of Engagement', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Converted to TAP', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Ring_of_Engagement' };
 Artefacts['Mithrode Jewel'] = {'order': 20, 'name': 'Mithrode Jewel', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS Increase Per Hour', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Mithrode_Jewel' };
 Artefacts['Fury Goader'] = {'order': 21, 'name': 'Fury Goader', 'weight': 1, 'maxLevel': 90, 'costFactor': 'Exponential-2', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Critical Hit Probability', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Fury_Goader' };
 Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 100, 'costLevelModifier': 0, 'effectLabel': 'Enemy Starting Health', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Death_Hex' };
+Artefacts['Warriors Periapt'] = {'order': 23, 'name': 'Warriors Periapt', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Incease Per Endurance', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Warriors_Periapt' };
+Artefacts['Focus of Elevation'] = {'order': 24, 'name': 'Focus of Elevation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Elevation-1', 'effectFactor': 0.1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS and TAP Increase Per Level', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Focus_of_Elevation' };
 var ExistingArtefacts = 0;
 var ArtefactsTotal = 0;
 var CrystalsToSpend = 0;
 var CrystalsSpentBuying = 0;
 var CrystalsSpentUpgrading = 0;
 var CrystalsRemaining = 0;
+var CookieExpireDays = 30;
 function initializePage()
 {
   var divTableObject = document.getElementById('ArtefactTableDiv');
@@ -219,6 +222,10 @@ function getArtefactLevelCost(artefactObject, artefactLevel)
   {
     artefactLevelCost = Math.round(Math.pow(artefactLevel + artefactCostLevelModifier, artefactCostFactor));
   }
+  else if (artefactCostType === 'Elevation')
+  {
+    artefactLevelCost = (artefactLevel + artefactCostLevelModifier) * artefactLevel;
+  }
   else if (artefactCostType === 'Nocri')
   {
     if (artefactLevel < 75)
@@ -309,9 +316,15 @@ function getSaveString()
   saveString += ';';
   return(saveString);
 }
+function getCookieExpireString()
+{
+  var d = new Date();
+  d.setTime(d.getTime() + (CookieExpireDays*24*60*60*1000));
+  return "expires="+d.toUTCString()+';';
+}
 function saveToCookie()
 {
-  document.cookie = 'RunebladeSaveData=' + getSaveString();
+  document.cookie = 'RunebladeSaveData=' + getSaveString() + ' ' + getCookieExpireString();
 }
 function saveToTextarea()
 {
