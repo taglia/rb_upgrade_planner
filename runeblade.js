@@ -31,6 +31,7 @@ var CrystalsToSpend = 0;
 var CrystalsSpentBuying = 0;
 var CrystalsSpentUpgrading = 0;
 var CrystalsRemaining = 0;
+var CookieExpireDays = 30;
 function initializePage()
 {
   var divTableObject = document.getElementById('ArtefactTableDiv');
@@ -315,9 +316,15 @@ function getSaveString()
   saveString += ';';
   return(saveString);
 }
+function getCookieExpireString()
+{
+  var d = new Date();
+  d.setTime(d.getTime() + (CookieExpireDays*24*60*60*1000));
+  return "expires="+d.toUTCString()+';';
+}
 function saveToCookie()
 {
-  document.cookie = 'RunebladeSaveData=' + getSaveString();
+  document.cookie = 'RunebladeSaveData=' + getSaveString() + ' ' + getCookieExpireString();
 }
 function saveToTextarea()
 {
