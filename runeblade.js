@@ -101,7 +101,6 @@ function setArtefactCurrentLevel(artefactName, newCurrentLevel)
       (newCurrentLevel > artefactObject['maxLevel']) )
   {
     newCurrentLevel = artefactObject['maxLevel'];
-    //alert(artefactObject['name'] + '\'s max level is ' + artefactObject['maxLevel']);
   }
   if ( (newCurrentLevel == 0) && (artefactObject['currentLevel'] > 0) )
   {
@@ -256,7 +255,9 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
   {
     artefactLevelEffect = artefactEffectBaseValue + (artefactLevel * artefactEffectFactor);
   }
-  return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffect + artefactObject['effectPostSymbol'] + '</strong>');
+  // Avoid showing useless decimals for Elevation (e.g. 0.300000000001%)
+  var artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
+  return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
 }
 function commify(number)
 {
