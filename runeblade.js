@@ -1,4 +1,4 @@
-var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000];
+var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000, 1000000, 1000000];
 var Artefacts = new Object;
 Artefacts['Rozh Gemstone'] = {'order': 0, 'name': 'Rozh Gemstone', 'weight': 0, 'maxLevel': 0, 'costFactor': 'Exponential-1.25', 'effectFactor': .5, 'effectBaseValue': .5, 'costLevelModifier': -1, 'effectLabel': 'Rune Multiplier', 'effectPreSymbol': '', 'effectPostSymbol': 'X', 'url': 'http://runeblade.wikia.com/wiki/Rozh_Gemstone' };
 Artefacts['Etraxxan Wristband'] = {'order': 1, 'name': 'Etraxxan Wristband', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 30, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Attack Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Etraxxan_Wristband' };
