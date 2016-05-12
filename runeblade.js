@@ -249,7 +249,11 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
   var artefactEffectFactor = artefactObject['effectFactor'];
   if (artefactEffectFactor == -999)
   {
-    artefactLevelEffect = commify(artefactObject['effectBaseValue'] + Math.round(Math.pow(3.98, artefactLevel)) - 4);
+    for (var i=artefactObject['currentLevel']+1; i<=artefactObject['upgradedLevel']; i++)
+    {
+      artefactLevelEffect += artefactObject['effectBaseValue'] + Math.round(Math.pow(3.98, artefactLevel)) - 4;
+    }
+    artefactLevelEffect = commify(artefactLevelEffect)
   }
   else
   {
