@@ -266,6 +266,46 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
   }
   return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
 }
+function getCurrency(number)
+{
+  var suffix = ['k','M','G','T','P','E','Z','Y','Q','W','R','U','I','O','A','S','D','F','H','J','L','M','C','q','w','r','u','i','o','a','s','d','f','h','j','l','x','c'];
+  var power = 3;
+
+  if (number < 1000) {
+    return(number);
+  }
+
+  do {
+    if ((number >= Math.pow(10, power)) && (number < Math.pow(10, (power + 3))) && (power % 3 == 0)) {
+      if (power <= 114) {
+        var prefix = getCurrencyPrefix(number, power);
+        if ((prefix >= 999.5) && (prefix < 1000)) {
+          return('1' + suffix[power / 3]);
+        }
+        else {
+          return(prefix + suffix[(power / 3) - 1]);
+        }
+      }
+      else if (power >= 117) {
+        var prefix = getCurrencyPrefix(number, power);
+        if ((prefix >= 999.5) && (prefix < 1000)) {
+          return('1!' + suffix[(power / 3) - 37]);
+        }
+        else {
+          return(prefix + '!' + suffix[(power / 3) - 37]);
+        }
+      }
+    }
+    else {
+      if (power % 3 == 0) {
+        power = power + 3;
+      }
+      else {
+        power++;
+      }
+    }
+  } while (Math.pow(10, power) <= number);
+}
 function getCurrencyPrefix(number, power)
 {
   var prefix = number / Math.pow(10, power);
