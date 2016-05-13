@@ -266,6 +266,23 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
   }
   return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
 }
+function getCurrencyPrefix(number, power)
+{
+  var prefix = number / Math.pow(10, power);
+  if (prefix < 10)
+  {
+    prefix = prefix.toFixed(2);
+  }
+  else if (prefix < 100)
+  {
+    prefix = prefix.toFixed(1);
+  }
+  else
+  {
+    prefix = prefix.toFixed(0);
+  }
+  return(prefix);
+}
 function commify(number)
 {
   return(number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
