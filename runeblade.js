@@ -309,7 +309,10 @@ function getCurrency(number)
 function getCurrencyPrefix(number, power)
 {
   var prefix = number / Math.pow(10, power);
-  if (prefix < 10)
+  if (prefix % 1 == 0) {
+    prefix = prefix.toFixed(0);
+  }
+  else if (prefix < 10)
   {
     prefix = prefix.toFixed(2);
   }
