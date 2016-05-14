@@ -279,7 +279,7 @@ function getCurrency(number)
     if ((number >= Math.pow(10, power)) && (number < Math.pow(10, (power + 3))) && (power % 3 == 0)) {
       if (power <= 114) {
         var prefix = getCurrencyPrefix(number, power);
-        if ((prefix >= 999.5) && (prefix < 1000)) {
+        if ((prefix >= 999.5) && (prefix <= 1000)) {
           return('1' + suffix[power / 3]);
         }
         else {
@@ -288,7 +288,7 @@ function getCurrency(number)
       }
       else if (power >= 117) {
         var prefix = getCurrencyPrefix(number, power);
-        if ((prefix >= 999.5) && (prefix < 1000)) {
+        if ((prefix >= 999.5) && (prefix <= 1000)) {
           return('1!' + suffix[(power / 3) - 37]);
         }
         else {
