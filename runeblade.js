@@ -416,10 +416,11 @@ function loadFromCookie(showAlert)
   if ( (document.cookie) && (document.cookie.length > 0) )
   {
     var saveStringMatches = document.cookie.match(/RunebladeSaveData=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*)+)/);
-    if (saveStringMatches.length > 0)
-    {
-      loaded = 1;
-      loadSaveString(saveStringMatches[1]);
+    if (saveStringMatches != null) {
+      if (saveStringMatches.length > 0) {
+        loaded = 1;
+        loadSaveString(saveStringMatches[1]);
+      }
     }
   }
   if (showAlert && !loaded)
