@@ -197,7 +197,17 @@ function calculateArtefactUpgradedCostAndEffect(artefactName)
     newArtefactCost += getArtefactLevelCost(artefactObject, i);
   }
   artefactCostObject.innerHTML = newArtefactCost;
-  artefactEffectObject.innerHTML = getArtefactLevelEffect(artefactObject, artefactObject['upgradedLevel']);
+  if (artefactObject['effectFactor'] == -999) {
+    var artefactEffectTotal = 0.0;
+    for (i=1; i <= artefactObject['upgradedLevel']; i++) {
+      artefactEffectTotal += getArtefactLevelEffect(artefactObject, i);
+    }
+    artefactEffectTotal = getCurrency(artefactEffectTotal);
+    artefactEffectObject.innerHTML = (artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactEffectTotal + artefactObject['effectPostSymbol'] + '</strong>');
+  }
+  else {
+    artefactEffectObject.innerHTML = getArtefactLevelEffect(artefactObject, artefactObject['upgradedLevel']);
+  }
   CrystalsSpentUpgrading = CrystalsSpentUpgrading + (newArtefactCost - currentArtefactCost);
   document.getElementById('CrystalsSpentUpgrading').value = CrystalsSpentUpgrading;
   calculateArtefactCosts();
@@ -249,22 +259,24 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
   var artefactEffectFactor = artefactObject['effectFactor'];
   if (artefactEffectFactor == -999)
   {
-    for (var i=artefactObject['currentLevel']+1; i<=artefactObject['upgradedLevel']; i++)
-    {
-      artefactLevelEffect += artefactObject['effectBaseValue'] + Math.round(Math.pow(3.98, artefactLevel)) - 4;
+    if (artefactLevel == 1) {
+      artefactLevelEffect = artefactObject['effectBaseValue'];
     }
-    artefactLevelEffect = commify(artefactLevelEffect)
+    else {
+      artefactLevelEffect = artefactObject['effectBaseValue'] + Math.round(Math.pow(10, (artefactLevel / 3)));
+    }
+    return artefactLevelEffect;
   }
-  else
-  {
+  else {
     artefactLevelEffect = artefactEffectBaseValue + (artefactLevel * artefactEffectFactor);
+    // Avoid showing useless decimals for Elevation (e.g. 0.300000000001%)
+    var artefactLevelEffectRnd = artefactLevelEffect;
+    if (!isNaN(artefactLevelEffect)) {
+      artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
+    }
+    return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
   }
-  // Avoid showing useless decimals for Elevation (e.g. 0.300000000001%)
-  var artefactLevelEffectRnd = artefactLevelEffect;
-  if (!isNaN(artefactLevelEffect)) {
-    artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
-  }
-  return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
+
 }
 function getCurrency(number)
 {
@@ -272,7 +284,7 @@ function getCurrency(number)
   var power = 3;
 
   if (number < 1000) {
-    return(number);
+    return(commify(number));
   }
 
   do {
