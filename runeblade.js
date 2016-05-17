@@ -1,4 +1,4 @@
-var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000];
+var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000, 1000000, 1000000];
 var Artefacts = new Object;
 Artefacts['Rozh Gemstone'] = {'order': 0, 'name': 'Rozh Gemstone', 'weight': 0, 'maxLevel': 0, 'costFactor': 'Exponential-1.25', 'effectFactor': .5, 'effectBaseValue': .5, 'costLevelModifier': -1, 'effectLabel': 'Rune Multiplier', 'effectPreSymbol': '', 'effectPostSymbol': 'X', 'url': 'http://runeblade.wikia.com/wiki/Rozh_Gemstone' };
 Artefacts['Etraxxan Wristband'] = {'order': 1, 'name': 'Etraxxan Wristband', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 30, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Attack Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Etraxxan_Wristband' };
@@ -9,7 +9,7 @@ Artefacts['Nanzuum Mana Cube'] = {'order': 5, 'name': 'Nanzuum Mana Cube', 'weig
 Artefacts['Nocri Orb of Teleportation'] = {'order': 6, 'name': 'Nocri Orb of Teleportation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Nocri-1.5', 'effectFactor': 1, 'effectBaseValue': 1, 'costLevelModifier': 0, 'effectLabel': 'Starting Level', 'effectPreSymbol': '', 'effectPostSymbol': '', 'url': 'http://runeblade.wikia.com/wiki/Nocri_Orb_of_Teleportation' };
 Artefacts['Thegian Pendant of Stealth'] = {'order': 7, 'name': 'Thegian Pendant of Stealth', 'weight': 1, 'maxLevel': 5, 'costFactor': 'Linear-10', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Enemies Evaded', 'effectPreSymbol': '', 'effectPostSymbol': '/10', 'url': 'http://runeblade.wikia.com/wiki/Thegian_Pendant_of_Stealth'};
 Artefacts['Arai Talisman'] = {'order': 8, 'name': 'Arai Talisman', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 25, 'costLevelModifier': 0, 'effectLabel': 'Master Guardian Encounter', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Arai_Talisman' };
-Artefacts['Loan Agreement'] = {'order': 9, 'name': 'Loan Agreement', 'weight': 1, 'maxLevel': 10, 'costFactor': 'Exponential-1.5', 'effectFactor': -999, 'effectBaseValue': 1500, 'costLevelModifier': 0, 'effectLabel': 'Starting Gold', 'effectPreSymbol': '', 'effectPostSymbol': '', 'url': 'http://runeblade.wikia.com/wiki/Loan_Agreement' };
+Artefacts['Loan Agreement'] = {'order': 9, 'name': 'Loan Agreement', 'weight': 1, 'maxLevel': 100, 'costFactor': 'Exponential-1.5', 'effectFactor': -999, 'effectBaseValue': 1000, 'costLevelModifier': 0, 'effectLabel': 'Starting Gold', 'effectPreSymbol': '', 'effectPostSymbol': '', 'url': 'http://runeblade.wikia.com/wiki/Loan_Agreement' };
 Artefacts['Mana Shard'] = {'order': 10, 'name': 'Mana Shard', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 2, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'Crystal Loot Increase', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Mana_Shard' };
 Artefacts['Spell Booster Charm: Invigorate'] = {'order': 11, 'name': 'Spell Booster Charm: Invigorate', 'weight': 1, 'maxLevel': 4, 'costFactor': 'Exponential-3', 'effectFactor': 1, 'effectBaseValue': 1, 'costLevelModifier': 0, 'effectLabel': 'Cooldown Removed From', 'effectPreSymbol': '', 'effectPostSymbol': ' spells', 'url': 'http://runeblade.wikia.com/wiki/Spell_Booster_Charm:_Invigorate' };
 Artefacts['Spell Booster Charm: Tap Life'] = {'order': 12, 'name': 'Spell Booster Charm: Tap Life', 'weight': 1, 'maxLevel': 30, 'costFactor': 'Exponential-1.5', 'effectFactor': 0.5, 'effectBaseValue': 15, 'costLevelModifier': 0, 'effectLabel': 'Tap Life Duration', 'effectPreSymbol': '', 'effectPostSymbol': 'm', 'url': 'http://runeblade.wikia.com/wiki/Spell_Booster_Charm:_Tap_Life' };
@@ -197,7 +197,17 @@ function calculateArtefactUpgradedCostAndEffect(artefactName)
     newArtefactCost += getArtefactLevelCost(artefactObject, i);
   }
   artefactCostObject.innerHTML = newArtefactCost;
-  artefactEffectObject.innerHTML = getArtefactLevelEffect(artefactObject, artefactObject['upgradedLevel']);
+  if (artefactObject['effectFactor'] == -999) {
+    var artefactEffectTotal = 0.0;
+    for (i=1; i <= artefactObject['upgradedLevel']; i++) {
+      artefactEffectTotal += getArtefactLevelEffect(artefactObject, i);
+    }
+    artefactEffectTotal = getCurrency(artefactEffectTotal);
+    artefactEffectObject.innerHTML = (artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactEffectTotal + artefactObject['effectPostSymbol'] + '</strong>');
+  }
+  else {
+    artefactEffectObject.innerHTML = getArtefactLevelEffect(artefactObject, artefactObject['upgradedLevel']);
+  }
   CrystalsSpentUpgrading = CrystalsSpentUpgrading + (newArtefactCost - currentArtefactCost);
   document.getElementById('CrystalsSpentUpgrading').value = CrystalsSpentUpgrading;
   calculateArtefactCosts();
@@ -249,18 +259,84 @@ function getArtefactLevelEffect(artefactObject, artefactLevel)
   var artefactEffectFactor = artefactObject['effectFactor'];
   if (artefactEffectFactor == -999)
   {
-    artefactLevelEffect = commify(artefactObject['effectBaseValue'] + Math.round(Math.pow(3.98, artefactLevel)) - 4);
+    if (artefactLevel == 1) {
+      artefactLevelEffect = artefactObject['effectBaseValue'];
+    }
+    else {
+      artefactLevelEffect = artefactObject['effectBaseValue'] + Math.round(Math.pow(10, (artefactLevel / 3)));
+    }
+    return artefactLevelEffect;
+  }
+  else {
+    artefactLevelEffect = artefactEffectBaseValue + (artefactLevel * artefactEffectFactor);
+    // Avoid showing useless decimals for Elevation (e.g. 0.300000000001%)
+    var artefactLevelEffectRnd = artefactLevelEffect;
+    if (!isNaN(artefactLevelEffect)) {
+      artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
+    }
+    return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
+  }
+
+}
+function getCurrency(number)
+{
+  var suffix = ['k','M','G','T','P','E','Z','Y','Q','W','R','U','I','O','A','S','D','F','H','J','L','M','C','q','w','r','u','i','o','a','s','d','f','h','j','l','x','c'];
+  var power = 3;
+
+  if (number < 1000) {
+    return(commify(number));
+  }
+
+  do {
+    if ((number >= Math.pow(10, power)) && (number < Math.pow(10, (power + 3))) && (power % 3 == 0)) {
+      if (power <= 114) {
+        var prefix = getCurrencyPrefix(number, power);
+        if ((prefix >= 999.5) && (prefix <= 1000)) {
+          return('1' + suffix[power / 3]);
+        }
+        else {
+          return(prefix + suffix[(power / 3) - 1]);
+        }
+      }
+      else if (power >= 117) {
+        var prefix = getCurrencyPrefix(number, power);
+        if ((prefix >= 999.5) && (prefix <= 1000)) {
+          return('1!' + suffix[(power / 3) - 37]);
+        }
+        else {
+          return(prefix + '!' + suffix[(power / 3) - 37]);
+        }
+      }
+    }
+    else {
+      if (power % 3 == 0) {
+        power = power + 3;
+      }
+      else {
+        power++;
+      }
+    }
+  } while (Math.pow(10, power) <= number);
+}
+function getCurrencyPrefix(number, power)
+{
+  var prefix = number / Math.pow(10, power);
+  if (prefix % 1 == 0) {
+    prefix = prefix.toFixed(0);
+  }
+  else if (prefix < 10)
+  {
+    prefix = prefix.toFixed(2);
+  }
+  else if (prefix < 100)
+  {
+    prefix = prefix.toFixed(1);
   }
   else
   {
-    artefactLevelEffect = artefactEffectBaseValue + (artefactLevel * artefactEffectFactor);
+    prefix = prefix.toFixed(0);
   }
-  // Avoid showing useless decimals for Elevation (e.g. 0.300000000001%)
-  var artefactLevelEffectRnd = artefactLevelEffect;
-  if (!isNaN(artefactLevelEffect)) {
-    artefactLevelEffectRnd = (artefactLevelEffect*10).toFixed(0)/10;
-  }
-  return(artefactObject['effectLabel'] + ': <strong>' + artefactObject['effectPreSymbol'] + artefactLevelEffectRnd + artefactObject['effectPostSymbol'] + '</strong>');
+  return(prefix);
 }
 function commify(number)
 {
@@ -340,10 +416,11 @@ function loadFromCookie(showAlert)
   if ( (document.cookie) && (document.cookie.length > 0) )
   {
     var saveStringMatches = document.cookie.match(/RunebladeSaveData=(((c|,a)[0-9]*:[0-9]+\-?[0-9]*)+)/);
-    if (saveStringMatches.length > 0)
-    {
-      loaded = 1;
-      loadSaveString(saveStringMatches[1]);
+    if (saveStringMatches != null) {
+      if (saveStringMatches.length > 0) {
+        loaded = 1;
+        loadSaveString(saveStringMatches[1]);
+      }
     }
   }
   if (showAlert && !loaded)
