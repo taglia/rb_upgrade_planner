@@ -1,4 +1,4 @@
-var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000, 1000000, 1000000];
+var ArtefactCosts = [1, 2, 4, 8, 16, 35, 70, 125, 250, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 128000, 256000, 512000, 650000, 800000, 1000000, 1000000, 1000000, 1000000];
 var Artefacts = new Object;
 Artefacts['Rozh Gemstone'] = {'order': 0, 'name': 'Rozh Gemstone', 'weight': 0, 'maxLevel': 0, 'costFactor': 'Exponential-1.25', 'effectFactor': .5, 'effectBaseValue': .5, 'costLevelModifier': -1, 'effectLabel': 'Rune Multiplier', 'effectPreSymbol': '', 'effectPostSymbol': 'X', 'url': 'http://runeblade.wikia.com/wiki/Rozh_Gemstone' };
 Artefacts['Etraxxan Wristband'] = {'order': 1, 'name': 'Etraxxan Wristband', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Linear-1', 'effectFactor': 30, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Attack Bonus', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Etraxxan_Wristband' };
@@ -25,6 +25,8 @@ Artefacts['Fury Goader'] = {'order': 21, 'name': 'Fury Goader', 'weight': 1, 'ma
 Artefacts['Death Hex'] = {'order': 22, 'name': 'Death Hex', 'weight': 1, 'maxLevel': 25, 'costFactor': 'Exponential-3', 'effectFactor': -1, 'effectBaseValue': 100, 'costLevelModifier': 0, 'effectLabel': 'Enemy Starting Health', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Death_Hex' };
 Artefacts['Warriors Periapt'] = {'order': 23, 'name': 'Warriors Periapt', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Exponential-1.5', 'effectFactor': 1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'TAP Incease Per Endurance', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Warriors_Periapt' };
 Artefacts['Focus of Elevation'] = {'order': 24, 'name': 'Focus of Elevation', 'weight': 1, 'maxLevel': 0, 'costFactor': 'Elevation-1', 'effectFactor': .1, 'effectBaseValue': 0, 'costLevelModifier': 0, 'effectLabel': 'DPS and TAP Increase Per Level', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Focus_of_Elevation' };
+Artefacts['Rozh Harmonizer'] = {'order': 25, 'name': 'Rozh Harmonizer', 'weight': 1, 'maxLevel': 100, 'costFactor': 'Exponential-2', 'effectFactor': 1, 'effectBaseValue': 50, 'costLevelModifier': 0, 'effectLabel': 'Rozh Gemstone Boost Per Level', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Rozh_Harmonizer'};
+Artefacts['Monocle of Myrech'] = {'order': 26, 'name': 'Monocle of Myrech', 'weight': 1, 'maxLevel': 20, 'costFactor': 'Myrech-7500', 'effectFactor': 1, 'effectBaseValue': 75, 'costLevelModifier': 0, 'effectLabel': 'Artefact Resale Value', 'effectPreSymbol': '', 'effectPostSymbol': '%', 'url': 'http://runeblade.wikia.com/wiki/Monocle_of_Myrech'};
 var ExistingArtefacts = 0;
 var ArtefactsTotal = 0;
 var CrystalsToSpend = 0;
@@ -245,6 +247,10 @@ function getArtefactLevelCost(artefactObject, artefactLevel)
     {
       artefactLevelCost = Math.round((1 + (((artefactLevel-1) - 74)/50)) * Math.pow(artefactLevel, 1.5));
     }
+  }
+  else if (artefactCostType == 'Myrech')
+  {
+    artefactLevelCost = parseInt(artefactCostFactor, 10);
   }
   return(artefactLevelCost);
 }
