@@ -416,6 +416,10 @@ function saveToTextarea()
 {
   document.getElementById('SaveDataTextarea').value = getSaveString();
 }
+function linkToTextarea()
+{
+  document.getElementById('DirectLinkTextarea').value = "http://rb.shm.me/?s="+getSaveString();
+}
 function loadFromCookie(showAlert)
 {
   var loaded = 0;
